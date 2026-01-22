@@ -43,11 +43,13 @@ else {
     statements3;
 }
 
-
+first is false, so x >= 3 && y <= 4
+second has to be true, so x < 5 && y == 7
+    but conficts with y<=4
 
 --> is it possible for "statements2" to execute?7
 
-
+no
 
 
 ////////////////////////////////////////////////////////
@@ -71,8 +73,19 @@ What types are Sarah, Bill, and Mae?
 
 (How might we simplify everything?)
 
+    sarah - bill is a knight
+    bill- mae is a knight
+    mae- " bill would say i'm a knave"
 
-    
+IF sarah is knight: bill must be a knight
+    mae would be knight 
+    doesnt work because bill said mae was knight
+
+IF sarah is knave: bill is knave, mae is knave
+    bill would lie and say mae is knight, mae lies and says bill would be knave
+
+    This one works
+
 
 
 ////////////////////////////////////
@@ -89,7 +102,13 @@ Unicorn says: "Yesterday was one of my lying days, too."
 
 What day is it?
 
+sunday- lion lied, should be truth
+tues/wed/fri/sat- whoever lied lied the day before, but should be lying 
+monday- uni tells truth mon/sun, should lie 
+thurs- lion truthfully says lied wed, uni lies about lying
 
+
+the day is thursday
 
 ////////////////////////////////
 
@@ -108,10 +127,9 @@ The second one says: "I'm Tweedledee."
 
 Which is which? What day is it?
 
+has to be sunday. every other say, they would give same name.
 
-
-
-
+they are who they say
 
 
 
@@ -139,7 +157,19 @@ The second one says: "I'm Tweedledee!"
 
 Who gets the rattle?
 
+    IF 1st is telling truth, tweedledee gets rattle 
+        second is lying, so they are Tweedledum
+        first is tweedledee, gets rattle.
+    
+    IF 1st is lying, tweedledum owns rattle
+        second is truth, so they are tweedledee
+        first is tweedledum, who gets the rattle
+    
+    first twin gets rattle
+
 Who is who?
+
+not enough information
 
 
 ///////////////////////////////////////////
@@ -156,12 +186,17 @@ Gold casket: "The portrait is in this casket."
 Silver casket: "The portrait is not in this casket."
 Lead casket: "The portrait is not in the gold casket."
 
+    could all be false, or only one is true
+
 Where is the portrait?
 
+    IF in gold: gold and silver would be true, so not true
 
+    IF in silver: only one statement is true, this works
 
+    IF in lead: two true statements, doesnt work
 
-
+it is in the silver
 
 ///////////////////////////////////
 
@@ -193,11 +228,15 @@ Bernard says: "At first I didn't know when Cheryl's
 
 Albert says: "Then I also know when Cheryl's birthday is."
 
+    nothing in may or june, because it has the day 18 & 19
+    cant be 14, so leaves only july 16
+
 
 When is it?
 
+july 16
 
-
+idk what just happened
 
 ///////////////////////////////////
 
@@ -218,12 +257,14 @@ Basic operations:
 
 Basic logic gates (draw on board)
 
+    only three: and, or, not
 
 gates still used to design circuits
 
 
 why do we care about equivalent circuits?
 
+    can simplify to save money, space
 
 what about programming?
 
@@ -236,28 +277,28 @@ AND:
 
 p q  #  p ∧ q
 --------------
-T T  #    
-T F  #    
-F T  #     
-F F  #    
+T T  #    T 
+T F  #    F
+F T  #    F 
+F F  #    F
 
 
 OR:
 
 p q  #  p ∨ q
 --------------
-T T  #    
-T F  #    
-F T  #    
-F F  #    
+T T  #    T
+T F  #    T
+F T  #    T
+F F  #    F
 
 
 NOT:
 
 p  # ¬p
 --------
-T  # 
-F  # 
+T  # F
+F  # T
 
 ////////////////////////////////////////////////
 
@@ -275,16 +316,17 @@ Otherwise we have not.
 
 p q  #  p → q
 --------------
-T T  #    
-T F  #      
-F T  #    
-F F  #     
+T T  #   T 
+T F  #   F    -broken promise
+F T  #   T 
+F F  #   T  -doesnt mean anything, didnt come up
+
 
 /////////////////////////////////////////
 
 How does the implies operator relate to programming?
 
-
+    if/then statement
 
 //////////////////////////////////////////
 
@@ -295,14 +337,16 @@ Design circuits for:
 
 p XOR q (with just the gates we've seen, not a specific XOR gate)
 
-
+    (pvq) ^ -(p^q)
+    drawing stuff, if you dont remember your fucked idk
+    top is left, bottom is right (of the inputs for the gate)
 
 /////////////////////////////////////
 
 How would we evaluate the output of these circuits with
 different inputs?
 
-
+just take it step by step
 
 Graphically build circuits:
 
@@ -332,13 +376,14 @@ Order of operations
 
 In math?
 
-
+(); ^x; *,/; +,-
 
 
 For logic statements:
 
 From highest (happens first) to lowest (happens last) precedence:
 
+(), ¬(!), ^(&&), V(or), →
 
 ////////////////////////////////////////////////
 
@@ -348,7 +393,7 @@ Given this statement:
 
 Add () to show the order of operations.
 
-
+(¬p) V (q ^ r)
 
 
 Evaluate the above statement using these
@@ -358,7 +403,7 @@ p is T
 q is F
 r is F
 
-
+F
 
 ///////////////////////////////////////////
 
