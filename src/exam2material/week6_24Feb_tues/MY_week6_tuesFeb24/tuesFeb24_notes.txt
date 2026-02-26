@@ -20,13 +20,27 @@ p → q   equivalent to   ¬p ∨ q
 
 
 p → q  ⊢  ¬p ∨ q
-
-     
+Top- level of conclusion is or
+    can prove one side separately, no
+    as backup, try PbC
+        assume !(¬p ∨ q)
+            if we had ¬p ∨ q, we would have F
+            try to prove !p to use OrI1
+            use NegI subproof
+                assume(p)
+                goal F
+            conclude !p
+        goal: F
 
 
 
 ¬p ∨ q   ⊢  p → q
-
+look at conclusion: top level is implies
+ImplyI subproof
+    assume P 
+        try OrE subproofs with premise
+        goal in both: q
+    goal: q
 
 
 
@@ -38,12 +52,29 @@ HW 4 problem 7
 
 
 ¬(p → q)  ⊢  p ∧ ¬q
+prove both sides of and separately- doesn't work
+    prove p? try PbC, assume !p, get suck
+last resort, try PbC on conclusion
+    assume !p ∧ ¬q
+        if we had p → q, would contradict W premise
+        try ImplyI subproof to get p → q, 
+        assume P,
+            no obvious way to get q, try PbC
+            subproof, assume !q
 
+            goal: F
+        goal: q 
+
+    goal: F 
 
 
 
 p ∧ ¬q   ⊢   ¬(p → q)
+break apart premise
+use NegI subproof for conclusion
+    assume p → q
 
+    goal: F
 
 
 /////////////////////////
@@ -59,38 +90,64 @@ How do we approach proofs?
 3. Look at what you are trying to prove 
     (what do we look for in goal/conclusion?)
 
-    ∧ - 
+        look at top level operator
 
-    ∨ -   
+    ∧ - think of two separate proofs, try and construct both individually, put them together with AndI
 
-    → - 
+    ∨ - look at two sides, can you prove one of them by themselves, use OrI1 OrI2
 
-    ¬(something) - 
+        see if you have an or statement, if so, try OrE to build conclusion
+
+    → - use ImplyI subproof. assume left side, try and get right side
+
+    ¬(something) - use NegI subproof. assume "something", try and get F (contradiction)
 
     just a propositional atom? like p.
+
+        see where the atom appears in previous claims
+        is it on right side of ->? try to prove left side, use ImplyE
+        try proof by contradiction subproof, assume !p, try and get F
+        can we get F? use BottomE to conclude atom
+        do you have or statement as claim? try OrE to get atom in both cases
 
 
 After each claim - 
 
-
+scan all available info (including assumes) to see if you can extract anything (and, implies)
 
 Inside a subproof - 
     (What are the different subproofs?)
 
+    OrE- both subproofs need to end with same claim, which is whatever i was trying to prove when opened OrE
+    ImplyI- try to get to the right side of my goal imply statement
+    PbC- F
+    NegI-F
+
+after opening subproof and writing down a goal, find the top level operator of that goal
+follow same pattern to nest subproof to build goal
+
     --> when do we open a subproof?
+    when you have one of those four in mind
 
     --> can we assume anything in a subproof? 
 
+    can assume ANY one statement when opening a subproof
+        but dont do it unless you have a pattern in mind
 
 
 
 Doesn't fit a pattern or doesn't work out from above?
 
-
+might hit brick wall- need to try different strategy
+    do you have an OR as a claim? try OrE with it
+    nothing working- try PbC, assume !(whatever you want), try to get contradiction
 
 When to use BottomE?
 
+if you are using OrE and can't get your goal in one subproof, but can get F
+use BottomE to conclude what you want
 
+don't use in PbC or NegI if you get F
 
 
 //////////////////////////////////
@@ -131,27 +188,28 @@ SOUNDNESS and COMPLETENESS of natural deduction in
     "true": demonstrate an argument with truth tables
 
 
-SOUNDNESS: ??
+SOUNDNESS: ?? everything i can prove is actually true
 
 p ∧ q 
 --------
 p
 
 
-COMPLETENESS: ??
+COMPLETENESS: ?? i can prove everything that is true
 
+propositional logic deduction is both sound and complete
 
 
 
 
 --> what would it mean if a proof system was unsound?
 
-
+bad
 
 --> what would it mean if a proof system was incomplete?
 
 
-
+there are true arguments we cannot prove
 
 
 
@@ -184,9 +242,9 @@ A set is an unordered collection of elements
 
 ∈: is in, exists in
 
-    x ∈ A  means?
+    x ∈ A  means? x exist in set A
 
-    x ∉ A  means?
+    x ∉ A  means? x does not exist in set A
 
 
 
@@ -199,14 +257,16 @@ Example: A = {1,4,7,11,20}
 
 - Common sets in math:
 
-    ℕ: 
-    ℤ: 
-    ℚ: 
-    ℝ: 
-    ℂ: 
-    ∅: 
+    ℕ: natural numbers(ints starting with one)
+    ℤ: integers (postive, negative, 0)
+    ℚ: rational numbers. can write as p/q where p, q ∈ Z and q != 0
+    ℝ: real numbers
+    ℂ: complex numbers
+    ∅: null set/ empty set
 
 ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ
+
+⊂ is subset of
 
 ////////////////////////////////////
 
@@ -219,15 +279,15 @@ Set builder notation.
 
 
 {x: x ∈ ℕ, 5 ≤ x ≤ 10}
-
+{5, 6,7,8,9,10}
 
 
 {k : k is a letter in "abracadabra"}
-
+{a,b,c,d,r}
 
 
 {x : x = 2k,  k ∈ ℕ}
-
+{2,4,6,8,10,...}
 
 
 {n : n = k^2, k ∈ Z}

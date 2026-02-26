@@ -4,6 +4,33 @@ HW 3 due tonight
 
     What will the structure be?
 
+    top level is rightmost or
+    (p ∨ q) ∨ r 
+
+    try orE
+
+    subproof 
+        assume p V Q
+
+        goal: r V q V p
+        top level is right most or
+        could OR if have r V q 
+            or if i had p
+
+        nested orE
+             goal: r V q V p
+        subproof -assume P
+        subproof -assume q
+            first get r V q, then r V q V p
+       
+
+    subproof    
+        assume r 
+    
+        goal: r V q V p
+
+
+
 
     How to build conclusion?
 
@@ -59,7 +86,11 @@ Logika features/tips
 
 General proof strategy to this point
 
-
+list premises
+break down any premises you can to get extra info
+look at the conclusion
+consider if you need OrE 
+always consider order of operations
 
 /////////////////////////
 
@@ -81,9 +112,13 @@ See Canvas announcement for list of topics.
 How to prove two propositional logic statements are 
 equivalent?
 
-    Approach 1:
+    Approach 1: two truth assignments
+    for every possible truth assignment, the two statements have the same output
 
-    Approach 2:
+    Approach 2: 
+        deduction with two proofs
+        statement1 |- statement2
+        statement2 |- statement1
 
 
 
@@ -91,20 +126,34 @@ equivalent?
 How to prove propositional logic statements are 
 NOT equivalent?
 
+find one truth assignment where the two statements have different outputs
 
+cant use deduction to prove inequivability
 
 
 What is satisfiability? 
 
+need one truth assignment where the statement outputs true
 
+NOT satisfiability-
+    full truth table to hwo the statement is always false
 
 - Determining whether an argument is valid or invalid
     (what is an argument?)
+    premises, conclustion
+
     valid: 
+        if for every truth assignment where all premises are true, the conclusion is also true
 
     how prove valid?
+        truth table with all premises and conclusion
+        look at truth assignments that make all premises true,
+        make sure they make conclusion true 
 
+        deduction
     how prove invalid?
+        find one truth assignment where all premises are true by conclusion false
+        cant prove invalid with deduction
 
 
 /////////////////////////////////////////

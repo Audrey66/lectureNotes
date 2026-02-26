@@ -73,11 +73,13 @@ Typing a → in Logika for natural deduction:
 
 (two underscores, >, :)
 
+
 //////////////////////////
 
 If you are trying to prove an implies statement, what should you
 always do?
 
+assume first half, conclusion find second half
 
 ImplyI examples:
 impI1.sc, impI2.sc, imp3.sc.
