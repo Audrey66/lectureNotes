@@ -33,27 +33,53 @@ Translate to predicate logic and evaluate:
 
 CIS200 is a CS course with a lab
 
+IsCs(CIS200) ⋀ HasLab(CIS200)
+
 //
 
 Not all CS courses have a lab
+
+¬(∀ x (IsCD(x) -> HasLab(x)))
+
+if used and, would say all courses were cs and all courses had a lab
+
+true- CIS 301 does not have a lab
+
+OR: find a CS course that doesnt have a lab
+ ∃ x (IsCs(x) ⋀ ¬HasLab(x))
 
 //
 
 There is a non-CS course with a lab
 
+∃ x (¬IsCs(x)  ⋀ HasLab(x))
+
 //
 
 No math course has a lab
 
+∀ x (ISMath(x) -> ¬HasLab(x))
+all math classes dont have a lab
+
+¬(∃ x IsMath(x)  ⋀ HasLab(x))
+there does not exist a math class with a lab
 //
 
 There is a CS course with more hours than a math course
+
+two quantifiers- one for CS one for math
+
+∃ x ∃ y (IsCs(x) ⋀ IsMath(y) ⋀ MoreHours(x,y))
 
 //
 
 There is a CS course with more hours than any math course
 
+∃ x ∀ y (IsCs(x) ⋀ IsMath(y) -> MoreHours(x,y))
 
+or
+
+∃ x  (IsCs(x) ⋀ (∀ y IsMath(y) -> MoreHours(x,y)))
 
 --> Where to put the quantifiers?
 
@@ -66,33 +92,33 @@ Evaluating predicate logic statements
 Our domain is k1...kn
 
 1) ∀ x P(x)
-    true when: 
-    false when: 
+    true when: P(k) is true for every k in our domain
+    false when: P(k) is false for one k in domain
 
 2) ∃ x P(x)
-    true when: 
-    false when: 
+    true when: just need one P(k) true in domain
+    false when: all P(k) is false in domain
 
 3) ¬(∀ x P(x))
-    true when: 
-    false when:
+    true when: just need one k in domain where P(k) is false
+    false when: P(k) is true for every k in domain
 
 4) ¬(∃ x P(x))
-    true when: 
-    false when: 
+    true when: P(k) is false for every k in domain
+    false when: just need one k where P(k) is true
 
 5) ∀ x ¬P(x)
-    true when: 
-    false when: 
+    true when: need P(k) to be false for every k in domain
+    false when: find a k where P(k) is true
 
 6) ∃ x ¬P(x)
-    true when: 
-    false when: 
+    true when: just need one k where P(k) is false
+    false when: need P(k) to be true for every k
 
 
 /////////////////
 
-Domain: ℤ (the integers)
+Domain: ℤ (the integers)- positive negative 0
 
 
 What do these mean in English? Are they true?
@@ -100,23 +126,36 @@ What do these mean in English? Are they true?
 
 ∀ n ∃ m (n^2 < m)
 
+for all integers, there exists another integer that is greater than
+    the square of the first integer
 
+the square of every integer is less than some other integer
 
-
+true. for any integer n, n^2 + 1 is an integer bigger than n^2
 
 ∀ x ∃ y (x == y^2)
 
+every integer is equal to the square of some other integer
+64 = 8^2
+16 = 4^2
+every integer is a perfect square
 
+false. 2 is not a perfect square
 
 
 ∀ n ∃ m (n^2 == m)
 
+for all integers, their square is another integer
 
+true. the square of every integer is an integer
+
+integers are closed under multiplication
 
 
 ∃ m ∀ n (n^2 == m)
 
-
+i can find an integer that = the square of every other integer
+false. no such number exist
 
 /////////////////////////
 
@@ -129,17 +168,18 @@ Write the following in predicate logic (Domain: ℤ):
 
 The sum of two negative integers is negative
 
+two quantifiers
 
+∀ x ∀ y (x < 0 ⋀ y < 0 -> ( x + y < 0))
 
-
-
+true, adding two negative numbers will always have a value less than original two numbers
 
 The difference of two positive integers is
 not necessarily positive
 
+∃ x ∃ y (x > 0  ⋀  y > 0  ⋀  (x - y <= 0))
 
-
-
+true,  x = 2, y = 3, both positive but 2 - 3 = -1, not positive
 
 /////////////////////////
 
@@ -179,6 +219,7 @@ suppose our domain is k1 through kn
 
 ¬(∀ x P(x)) is equivalent to...
 
+¬(P(k1) ⋀ ... ⋀ P(kn))
 
 
 
@@ -193,7 +234,7 @@ Apply DeMorgan's laws: example
 or outside a statement with logical connectives
 
     Reminder:
-        p → q is equivalent to (OR statement):
+        p → q is equivalent to (OR statement): ¬p ⋁ q
         ¬(p ⋀ q) is equivalent to: 
         ¬(p ⋁ q) is equivalent to: 
 
@@ -220,10 +261,20 @@ Translation of negation:
 
 A 5th grade prize winner isn't friends with anyone
 
-translation: 
+translation: two quantifiers, one for 5th grader, one for friends
+    ∃ x ∀ y (in5th(x)  ⋀ wonPrize(x)  ⋀ ¬friendsWith(x,y))
+
 negate:
+    ¬(∃ x ∀ y (in5th(x)  ⋀ wonPrize(x)  ⋀ ¬friendsWith(x,y)))
+    ∀ x ∃ y ¬((in5th(x)  ⋀ wonPrize(x))  ⋀ ¬friendsWith(x,y))
+    ∀ x ∃ y (¬(in5th(x)  ⋀ wonPrize(x))  ⋁ friendsWith(x,y))
+    ∀ x ∃ y (¬(in5th(x)  ⋀  wonPrize(x))  ⋁ friendsWith(x,y))
+switch the or to an implies
+    ∀ x ∃ y ((in5th(x)  ⋀  wonPrize(x))  -> friendsWith(x,y))
 
 translation of negation: 
+
+all 5th grade prize winners have a friend
 
 ////////////////////////////////////
 
