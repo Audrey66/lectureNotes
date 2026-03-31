@@ -65,6 +65,23 @@ How will we prove P(1)?
 How will we prove ∀ k (P(k) → P(k+1))? 
     (How would we prove this for-all statements in predicate logic?)
 
+use for all introduction
+    pick random individual in domain
+    
+    assume P(k)
+
+
+    goal: prove P(k+1)
+
+    prove P(k) → P(k+1)
+
+pieces of induction 
+
+    P(1): proving for the first one (base case)
+
+    ∀ k (P(k) → P(k+1)): inductive step
+        part where we assume P(k) is inductive hypothesis
+    
 
 
 ////////////////////////////////////
@@ -75,7 +92,7 @@ Why are we doing this?
 
 Revisit our example:
 
-We want to prove that for any positive integer n:
+We want to prove that for any natural number n:
 
     1 + 2 + ... + n = n*(n+1)/2
 
@@ -83,7 +100,20 @@ We want to prove that for any positive integer n:
 
 
 Proof by induction.
+base case. must prove that the claim holds for the smallest value in our domain, n = 1. 
+on the left side we have 1 and on the right side we have 
+    1*(1+1) /2 = 1
+the two sides are equal, so the base case holds
 
+inductive step. we assume the inductive hypothesis, that 
+    1 + 2 + ... + k = k*(k+1)/2
+where k is some natural number. we must prove the claim holds for k + 1,  so we must prove that:
+     1 + 2 + ... + k + (k+1) = (k+1)*(k+2)/2
+
+we have that:
+     1 + 2 + ... + k + (k+1) = k*(k+1)/2 + (k+1) by inductive hypothesis
+     ...
+     =  (k+1)*(k+2)/2
 
 
 /////////////////////////////////
@@ -95,18 +125,18 @@ Proof by induction.
 Do you think induction can be used to prove properties for
     ALL integers?
 
+no. need a smallest value
 
 /////////////////////////////////
 
 Induction template.
 
-1) 
+1) prove base case (prove for smallest in domain)
 
 
-2) 
+2) inductive step. assume insuctive hypothesis (that claim holds for some k in domain).
+prove claim holds for k + 1
 
-
-3) 
 
 /////////////////////////////////
 
@@ -131,12 +161,22 @@ Proof by induction.
 Example: Prove that 3^n - 1 is even for all positive integers n.
 
 
-what does "even" mean? 
-
+what does "even" mean? divisible by 2
+number n is even if n = 2a where a is an integer
 
 
 Proof by induction.
 
+base case. we must prove our claim for the smallest positive integer, 
+n = 1. we have 3^1 - 1 = 3 - 1 = 2. since 2 = 2*1 and 1 is an int, then 3^1 - 1 is even, base case holds
+
+inductive step. we assume inductive hypothesis- that 3^k - 1 is even for some positive int k
+must show that 3^(k+1) - 1 is even
+
+3^(k+1) - 1 
+3 * 3^k + 1
+3(3^k - 1) - 1 + 3
+3(3^k - 1) + 2
 
 
 //////////////////////////////////
