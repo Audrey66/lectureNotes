@@ -46,25 +46,42 @@ Example (contrapositive)
 If x^2 is odd for an integer x, then x is odd.
 
 Think of as P → Q
-    P: ? 
-    Q: ? 
-
-Contrapositive? 
-
+    P: x^2 is odd for an int x
+    Q: x is odd
 
 
 
 
 Try direct proof first.
 
+assume x^2 is odd for int x. id x^2 is odd, x^2 = 2k + 1 for some int k
+we have that:
+    x^2 = 2k + 1
+
+    (would need to take sqrt root, but then we wouldn't know if the result was an int)
+
+goal: x is odd
+
+If x^2 is odd for an integer x, then x is odd.
 
 
-
-
+Contrapositive? 
+if some integer x is even, then x^2 sqrt is even
+(the sqrt of an even number is even)
 
 Now try contrapositive proof.
 
+let x be an even int. thus x = 2k for some int k 
 
+srqt both sides, we have 
+x^2 = (2k)^2
+= 4k^2
+= 2(2k^2)
+
+thus x^2 = 2a where a is the integer 2k^2, so x^2 is even
+
+
+goal: x^2 is even
 
 
 --> best to indicate in proof that you are using contrapositive
@@ -79,19 +96,20 @@ We want to "prove" that 1 = 2.
 "Proof:"
 Let a and b be two equal positive integers. We have that:
 
-    1) a = b                    (reason?) 
+    1) a = b                    (reason?) premise
 
-    2) a^2 = ab                 (reason?) 
+    2) a^2 = ab                 (reason?) multiply both sides by a 
 
-    3) a^2 - b^2 = ab - b^2     (reason?)
+    3) a^2 - b^2 = ab - b^2     (reason?) subtracting b^2 from both sides
 
-    4) (a-b)(a+b) = b(a-b)      (reason?) 
+    4) (a-b)(a+b) = b(a-b)      (reason?) factoring both sides 
+    //if a = b, a - b = 0, cannot divide by 0
 
-    5) a+b = b                  (reason?)
+    5) a+b = b                  (reason?) divide both sides by a-b
 
-    6) 2b = b                   (reason?)              
+    6) 2b = b                   (reason?) plug b in for a by premise         
 
-    7) 2 = 1                    (reason?) 
+    7) 2 = 1                    (reason?) divide both sides by b
 
 
 
@@ -147,8 +165,28 @@ Example (use proof by contradiction):
 If x^2 is even for an integer x, then x is even.
 
 (which template? )  
+second
+
+assume if part 
+suppose x^2 is even for some int x
+assume for the sake of contradiction, that x is odd
+
+if x is odd, then x = 2k+1 for some int k. 
+furthermore, if x^2 is even, the x^2 = 2m for some int m
+
+plugging in x = 2k+1, we have:
+    x^2 = (2k+1)^2
+    = 4k^2 + 4k + 1
+    = 2(2k^2 +2k) + 1
+    
+thus x^2 = 2a+1 where a is an int 2k^2 + 2k, which means that x^2 is odd
+this contradicts with previous assumption that x^2 is even
+
+thus x is even
 
 
+goal: contradiction
+goal: x is even
 
 
 //////////////////////////
@@ -172,7 +210,35 @@ and any number that is not irrational is rational.
 Example: use proof by contradiction to prove that sqrt(2)
 is irrational.
 
-(which template?  ) 
+(which template?  ) 1st (not if then)
+
+assume opposite 
+for sake of contradiction, assume sqrt(2) is rational
+thus sqrt(2) = p/q where p and q are integers and q != 0.
+we choose p and q such that p/q is fully reduced and p and q share no common factors
+
+
+sqrt both sides of sqrt(2) = p/q
+we have: 
+    2 = p^2/q^2
+multiplay both sides by q^2
+    2q^2 = p^2
+thus p^2 = 2a where a is the int q^2 so p^2 is even
+p is also even by previous proof (before quiz)
+
+since p is even, p = 2b for some int b
+plugging this in to 2q^2 = p^2 we have:
+    2q^2 = (2b)^2
+    = 4b^2
+divde both sides by 2
+    q^2 = 2b^2
+thus q^2 = 2c where c is the int b^2, so q^2 is even
+we have that q is also even by our previous proof
+
+
+p/q not fully reduced if both p and q are even
+this contradicts with assumption that it was reduced 
+so sqrt(2) is irrational
 
 
 /////////////////////////////////
@@ -183,17 +249,21 @@ Proofs with sets.
 
 Prove that A ⊆ B?
     --> how would we express this in predicate logic?
+⊆ is subset
 
-
+∀ x (x ∈ A  → x ∈ B)
 
     --> proof template? 
+   if for all: pick random individual
+    assume individual is in a
+    ...
+    prove individual it is in B
 
 
 
 
 
-
-Prove that A = B?
+Prove that A = B? prove A ⊆ B, then B ⊆ A
 
 
 ///////////////////////////////
@@ -205,16 +275,24 @@ Prove that {x : x = 4k + 2, k ∈ ℤ} ⊆ {x : x = 2a, a ∈ ℤ}
 A = {x : x = 4k + 2, k ∈ ℤ} 
 B = {x : x = 2a, a ∈ ℤ} 
 
-A: what elements?  
+A: what elements? all evens 2 more than multiple of 4 
 
 
-B: what elements? 
+B: what elements? all evens
 
 
 Proof that A ⊆ B.
+pick random individual
+
+suppose x ∈ A. 
+thus x = 4k+2 where k is an int. factor out
+x = 2(2k+1), so x = 2a where a is the int 2k+1
+
+another proof
+thus x ∈ B
 
 
-
+...want to show x ∈ B
 
 
 ///////////////////////////////
@@ -222,6 +300,20 @@ Proof that A ⊆ B.
 What if we wanted to prove something like:
 
 A ⋂ B = C?
+
+two proofs. first prove A ⋂ B ⊆ C
+assume x ∈ A ⋂ B. then x ∈ A and x ∈ B.
+(write out what x = to be in A using set builder notation and write out what x = to be in B)
+
+get x = the format of the set builder for C, and conclude x ∈ C
+
+
+then C ⊆ A ⋂ B
+suppose x ∈ C. write the format x = (whatever it means to be in C).
+
+get x = the format for the set builder for A, then get x = format for set builder for B
+then conclude x ∈ A ⋂ B
+
 
 ///////////////////////////////
 
