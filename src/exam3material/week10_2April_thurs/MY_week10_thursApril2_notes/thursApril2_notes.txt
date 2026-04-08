@@ -54,7 +54,7 @@ Think of as P → Q
 
 Try direct proof first.
 
-assume x^2 is odd for int x. id x^2 is odd, x^2 = 2k + 1 for some int k
+assume x^2 is odd for int x. if x^2 is odd, x^2 = 2k + 1 for some int k
 we have that:
     x^2 = 2k + 1
 

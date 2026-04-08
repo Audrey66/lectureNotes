@@ -4,6 +4,9 @@ HW 8 due tonight
 where Product(m, n) is the product of the integer m and
 the nonnegative integer n
 
+base case: n = 0
+    product(m,0) = 0
+    product(m,n) = ??(recursive involiving n-1), n > 0
 
 
 
@@ -12,19 +15,36 @@ irrational number is irrational.
 
 How to write as an IF/THEN?
 
-
+if we have a rational number and an irrational number 
+    then their sum is irrational
 
 
 Rational definition?
 
+a number r is rational if r = p/q, where p and q are integers and q != 0
+will need to reference 
 
+a number is irrational if it is not rational  
 
 
 How to start the proof? 
 
+assume we have a rational number r and irrational number i
+assume, for sake of contadiction, that i+r is rational
 
+since r is rational, r = p/q where p and q are ints and q != 0
+since i+r is rational, i+r = a/b, where a and b are ints and a != 0
 
+we have:
+    i = (i+r) - r 
+    = a/b - p/q 
+    (put over common denominator)
+    (show common denominator is not 0)
 
+after that you have contradiction
+    i would meet def of rational, but we assumed i is irrational 
+
+goal: contradiction
 
 
 HW 9 will be posted after class
@@ -42,8 +62,9 @@ of basic programs.
 
 (Why does this matter?)
 
+things that are sensitive (finacial, medical, any software in very expensive equipment like space shuttles, planes, etc.)
 
-
+library methods (like sorting)
 
 AWS formal methods
 
@@ -111,11 +132,11 @@ Then: prove program correctness in "auto" mode
 
 ////////////////////////
 
-Preconditions: ?
+Preconditions: 
+    assumptions we need to make before some section of code 
 
-
-Postconditions: ?
-
+Postconditions: 
+    things we want to prove our program does
 
 /////
 
@@ -144,7 +165,9 @@ assert(some claim)
 
 How are Logika asserts different from C# (and other languages)?
 
+logika: assert is satisfied if we have proved what it Claims
 
+other languages: asserts call the code 
 
 
 
@@ -152,7 +175,7 @@ How are Logika asserts different from C# (and other languages)?
 
 Process of validating a program:
 
-
+(user input)
 
 (any assumptions needed about user input - assume)
 
@@ -168,8 +191,7 @@ program statement
 
 (claims/asserts about output/results/postconditions)
 
-
-
+assert statement
 
 
 
@@ -196,11 +218,14 @@ Premise
 Example:
 
 var input: Z = Z.prompt("Enter a positive number: ")
-assume(num > 0)
+assume(input > 0)
 var y: Z = 12
 
 //proof block? what would go there?
-
+deduce(
+    1 (input > 0) by premise,
+    2 (y == 12) by premise
+)
 
 
 
@@ -212,8 +237,8 @@ Algebra* (or Algebra T)
 
     Deduce(
         1 ( x == 2 ) by Premise,
-        2 ( x >= 2 ) by ???,
-        3 ( 4 > 0 ) by ???
+        2 ( x >= 2 ) by Algebra*(1),
+        3 ( 4 > 0 ) by Algebra T
     )
 
 
@@ -359,10 +384,10 @@ Deduce(
     3 ( another == 5 - (x+2)*3 )    by Premise,
 
     //substitute in for "num" in "answer"
-    4 
+    4 (answer == 4*(x+2)+ 8) by Subst_<(1,2)
 
     //substitute in for "x+2" in "another"
-    5 
+    5 (another == 5 - num*3) by Subst_>(1,3)
 )
 
 

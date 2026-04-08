@@ -6,6 +6,7 @@ import org.sireum._
 //write a separate function to add all elements in a sequence
 //create a sequence, call the function, print the result
 
+//s = sequence zs=sequence of numbers
 def sumSequence(seq: ZS) : Z = {
   var sum: Z = 0
 

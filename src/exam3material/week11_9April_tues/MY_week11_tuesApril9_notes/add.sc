@@ -14,7 +14,11 @@ val x: Z = 2
 
 val y: Z = x + 2
 
-
+Deduce(
+    1 (x == 2) by Premise,
+    2 (y == x + 2) by Premise,
+    3 ( y == 4) by Algebra*(1,2)
+)
 
 //what can we put in a proof block here?
 
