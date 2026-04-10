@@ -47,7 +47,7 @@ var y: Z = x + 1
 Deduce(
     1 ( x + 1 > 0 ∧ x + 1 < 10 ) by Premise,
     2 ( y == x + 1 ) by Premise,
-
+    3 ( y > 0 ∧ y < 10 ) by Subst_>(2,1)
     //how to plug in y?
 )
 
@@ -60,11 +60,17 @@ var x: Z = 2
 
 //what could we put in a proof block here?
 
-
+Deduce (
+    1 ( x == 2) by premise
+)
 
 
 x = x + 2       
 
+deduce (
+    1 ( x == 2) by premise // no sense
+
+)
 
 //what might we try to put in a proof block here?
 
@@ -85,6 +91,21 @@ using:
 in the very next proof block. Only ONE "Old" value exists
 at a time.
 
+var x: Z = 2
+
+Deduce (
+    1 ( x == 2) by premise
+)
+
+
+x = x + 2       
+
+deduce (
+    1 (Old(x) == 2) by premise, 
+    2 ( x == Old(x) + 2) by premise,
+    3 ( x == 4) by Algebra*(1,2)
+)
+
 
 The Old(name) refers to value of the variable just before
 the latest update.
@@ -95,11 +116,16 @@ by the end of next proof block
 
 y = y + 4
 
+deduce(
+    1 ( y == (Old(y) + 4)) by premise // this works
+)
+
 x = x + 3
 
 Deduce(
     //what "Old" values are available?
-
+    1 ( y == (Old(y) + 4)) // wasnt most recent change 
+    2 ( x == Old(x) + 3) by premise //works, most recent
 )
 
 //////////////////////
@@ -131,12 +157,14 @@ the only number data type is Z, which is integer
 
 x / 7 - always integer division
 
+
 //what if x is 10
 test = x / 7
 
 Deduce(
     1 ( test == x / 7 ) by Premise,
-    2 ( test*7 == x ) by Algebra*(1) //is this true?
+    2 ( test*7 == x ) by Algebra*(1), //is this true? no, only if multiple of 7, would need x % 7 == 0
+    3 ( x == test * 7 + x % 7) by Premise, //fine even if x not multiple of 7
 )
 
 
@@ -200,7 +228,8 @@ Deduce(
 if (C) {
     Deduce(
         //what premises?  
-
+        1 ( C ) by Premise, //from if condition
+        2 ( P ) by Premise, // was true before, nothing changed
     )
 
     statements
@@ -213,7 +242,8 @@ if (C) {
 } else {
     Deduce(
         //what premises? 
-        
+        1 ( !(C) ) by Premise, //C is false since in else
+        2 ( P ) by Premise, // was true before if, nothing changed
         
     )
 
@@ -227,7 +257,8 @@ if (C) {
 
 Deduce(
     //what premises?
-
+    1 ( Q ) by Premise, // true in both branches, had to follow one of the branches 
+    2 ( A | B ) by Premise, // A true in if, B true in else
 
 )
 
@@ -254,22 +285,25 @@ Next week:
 
 if (cond1) {
     if (cond2) {
-        //know: ?
+        //know: cond1, cond2
     } else {
-        //know: ?
+        //know: !(cond2)
     }
-    //Deduce block
+    //Deduce block (state things that were true in both branches)
+        //state thing1 | thing 2 if one was true in if, another in else
 
 } else {
     if (cond2) {
-        //know?
+        //know !(cond1), cond2
     } else {
-        //know?
+        //know !cond1, cond2
     }
-    //Deduce block
+    //Deduce block (state things that were true in both branches)
+        //state thing1 | thing 2 if one was true in if, another in else
+
 }
 
-Deduce block
+Deduce block(things are premise if they are shown in both summary blocks after nested statement)
 
 ///////////////////////////////
 
