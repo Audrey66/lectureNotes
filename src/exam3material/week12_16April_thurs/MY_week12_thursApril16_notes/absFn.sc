@@ -59,6 +59,23 @@ val x: Z = -4
 //what *should* the absolute value be?
 val calc: Z = absVal(x)
 
+Deduce(
+  1 ( x == -4) by Premise,
+  2 ( calc >= 0) by Premise,
+  3 ( calc == -1 * x | calc == x) by Premise,
+  4 Subproof(
+    5 Assume(calc == -1 * x),
+    6 ( calc == 4) by Algebra*(1,5),
+  ),
+  7 Subproof(
+    8 Assume(calc == x),
+    9 (calc == -4) by Algebra*(1,8),
+    10 ( F ) by Algebra*(2,9),
+    11 ( calc == 4) by BottomE(10)
+  ),
+  12 ( calc == 4 ) by OrE(3, 4, 7)
+)
+
 //THURSDAY: finish from here
 
 // calc >= 0
