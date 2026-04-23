@@ -78,6 +78,15 @@ Problems will be similar in format to Homework 7-10.
 
 When doing programming logic:
     - use a proof block to process each variable update
+        before function call: prove precondition
+        before any assert: prove the assert
+        when a variable changes: use "old" and process what changed
+        if/else: show something in if and else  
+            after if/else: can say as premise a claim you proved in both branches
+                A | B (if A was proved in if and B in else)
+        before a function returns: prove postcondition
+        prove any invariants at end of loop iteration and before a loop begins
+
     - use exact assignment statements, previous claims,
         conditions, etc. as premises (using "Old" for previous
         value of variable that just changed)
@@ -88,3 +97,36 @@ When doing programming logic:
 
 
 Now, we will work through practice exam 3
+
+predicate logic proof example 
+
+try existE 
+Let (alias:T)=> Subproof(
+    1 Assume (D(alias) & !B(alias)),
+    2 (D(alias)) by AndE1(1),
+    3 ( !B(alias)) by AndE2(1),
+    4 ( !B(alias) -> S(alias)) by AllE[T](2),
+    5 ( S(alias)) by ImplyE(7,6),
+    6 ( E((x:T) => S(x)) by ExistI[T](8)
+)
+7 ( E((x:T) => S(x))) by ExistI[T](1,3)
+//conclude E((x:T) => S(x))
+
+
+math induction example
+2^1+2^2+...2^n = 2^n+1 - 2
+
+must prove our claim for smallest positive int n = 1
+Base case: 
+    left side: 2^1 = 2, right side: 2^1+1 -2 = 2
+
+inductive step. we assume the inductive hypothesis- that 2^1+2^2+...2^k = 2^k+1 - 2 for some fixed positive int k 
+we must prove that 2^1+2^2+...2^k + 2^k+1 = 2^(k+1)+1 - 2
+
+we have:
+    2^1+2^2+...2^k + 2^k+1 = 2^k+1 - 2 + 2^k+1 (using IH)
+    = 2(2^k+1) - 2
+    = 2^k+2 - 2
+    = 2^(k+1)+1 - 2
+
+

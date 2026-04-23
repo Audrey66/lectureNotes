@@ -59,6 +59,8 @@ val x: Z = -4
 //what *should* the absolute value be?
 val calc: Z = absVal(x)
 
+//remember Res[Z] >= 0,
+  //Res[Z] == -1*numOrig | Res[Z] == numOrig
 Deduce(
   1 ( x == -4) by Premise,
   2 ( calc >= 0) by Premise,
