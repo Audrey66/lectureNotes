@@ -7,6 +7,21 @@ def makeFirstZero(seq: ZS): Unit = {
   //how would we write the function contract?
   //what do we want to require of seq?
   //how can we describe how seq will change?
+
+  Contract(
+    Requires(
+      seq.size > 0
+    ),
+    Modifies(seq),
+    Ensures(
+      seq(0) == 0
+      //every other position is unchanged
+      //∀
+      IAll(1 until seq.size)(k => seq(k)== In(seq)(k))
+    )
+  )
+
+  seq(0) == 0
 }
 
 ///// Test code ///////////
@@ -15,3 +30,4 @@ var nums: ZS = ZS(1,2,3)
 makeFirstZero(nums)
 
 //---> what should we assert?
+assert(nums == ZS(0,2,3))

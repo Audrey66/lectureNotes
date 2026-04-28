@@ -30,6 +30,9 @@ HW 11 will be posted after class, due Tues May 5
 Today:
 
 - Logika modes
+
+automatic: write function contracts, write loop invariant blocks
+
 - Verifying programs with sequences
 
 
@@ -89,14 +92,14 @@ Suppose "seq" is our sequence
 
 
 
-∀ (lower until upper)(k => some statement about seq(k) )
+∀ (lower (bound) until upper (bound))(k => some statement about seq(k) )
     (does NOT include upper)
 
 
 ∀ (0 until seq.size)(k => seq(k) == 0 )
     
     --> what does this say?
-
+all elements in the sequence are changed to 0
 
 
 
@@ -105,21 +108,31 @@ Similarly, can use ∃
 ∃ (0 until seq.size)(k => seq(k) == 0 )
 
     --> what does this say?
+there is a position that has been changed to 0
 
 ///////////////////////////
 
 Writing function contract for function with a sequence:
 
 - Requires?
+    these conditons must be met before function is called (preconditions) 
+    need to add requirements to make sure program doesnt crash
+
 - Modifies?
+    state if a sequence parameter is changing 
+
 - Ensures?
+    what changes were made, including sequence parameter
+        need to describe every value in sequence will be after calling the function
+    describe what is being returned
+
 
 
 
 
 
 --> In(seq)
-
+val seq had at the beginning of the function call (like Old())
 
 
 ///////////////////////////
