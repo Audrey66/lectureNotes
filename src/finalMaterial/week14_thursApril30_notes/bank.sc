@@ -15,8 +15,8 @@ val eliteMin: Z = 1000000 // $1M is the minimum balance for elite members
 )
 
 def deposit(amount: Z): Unit = {
-    //what is an unwritten precondition about the global invariants?
-    //what is an unwritten postcondition about the global invariants?
+    //unwritten precondition about the global invariants?
+    //unwritten postcondition about the global invariants?
 
     balance = balance + amount
 
@@ -26,8 +26,8 @@ def deposit(amount: Z): Unit = {
 }
 
 def withdraw(amount: Z): Unit = {
-    //what is an unwritten precondition about the global invariants?
-    //what is an unwritten postcondition about the global invariants?
+    //unwritten precondition about the global invariants?
+    //unwritten postcondition about the global invariants?
 
     balance = balance - amount
 
