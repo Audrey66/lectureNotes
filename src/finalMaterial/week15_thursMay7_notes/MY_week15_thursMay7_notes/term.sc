@@ -45,6 +45,18 @@ def mult(x: Z, y: Z): Z = {
     return sum
 }
 
+//claim multRec terminates for y >= 0
+
+//base case, show it will terminate at y == 0, for smallest value in domain
+//when y is 0 we immediatly return
+
+//inductive step. assume inductive hypehesis - that multRec terminates for some fixed y=k >= 0, k is int
+//must show that multRec terminates when our second parameter (y) is k+1
+//we would go into else because k + 1 has to be at least 1
+//there, we make a recursive call, passing y-1 (k+1-1 = k) as second parameter (really calling multRec(x,k))
+//by inductive hyp, that recursive call terminates
+//at that point we just do addition, return so we also terminate
+
 def multRec(x: Z, y: Z): Z = {
     Contract(
         Requires(y >= 0),
@@ -56,7 +68,7 @@ def multRec(x: Z, y: Z): Z = {
     if (y == 0) {
         answer = 0
     } else {
-        var temp: Z = mult(x, y-1)
+        var temp: Z = multRec(x, y-1)
         answer = x + temp
     }
 

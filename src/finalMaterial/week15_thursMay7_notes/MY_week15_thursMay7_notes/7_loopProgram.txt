@@ -10,18 +10,20 @@ def diff(big: Z, small: Z): Z = {
     )
 
     //PREMISES:
-    big >= small
+    big >= small 
 
 
     var count: Z = 0
     var cur: Z = big
 
     //PREMISES:
-
+    big >= small 
+    count == 0
+    cur == big
 
 
     //SHOW:
-
+    count == (big-cur) //must prove all invariants before loop starts
 
 
     while (cur != small) {
@@ -31,23 +33,28 @@ def diff(big: Z, small: Z): Z = {
         )
 
         //PREMISES:
-
+        big >= small
+        count == (big-cur) //list all as premise at start of iteration
+        cur != small
 
 
         cur = cur - 1
         count = count + 1
 
         //SHOW:
+        count == (big-cur) // must prove all invariants still hold at end of loops
 
 
     }
 
     //PREMISES:
-
+    big >= small
+    count == (big-cur) // can list all invariants as premises
+    !(cur != small) // loop has ended
 
 
     //SHOW:
-
+    count == big-small //prove all postconditions
 
 
     return count
@@ -62,14 +69,14 @@ one == 10
 
 
 //SHOW:
-one+4 >= one
+one+4 >= one // must prove all preconditions based on what parameters being passed
 
 var answer: Z = diff(one+4, one)
 
 
 
 //PREMISES:
-answer == (one+4)-one
+answer == (one+4)-one // lsit all postconditions as premises after funtion call using what we passed as parameters
 one == 10
 
 

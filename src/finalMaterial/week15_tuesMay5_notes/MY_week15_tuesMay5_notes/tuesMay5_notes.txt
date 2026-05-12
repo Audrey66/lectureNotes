@@ -22,6 +22,14 @@ Global variables and global invariants.
 
 - Multiple functions might modify the same global variables
 
+writting a class to represent a clock (time of day)
+    fields: hours, minutes, seconds, am/pm 
+    minutes should always be between 0-59 (global invarient)
+    
+    //need to require as precondition that newMin be 0-59, otherwise violate global invariant
+    public void changeMinutes(int newMin){
+        minutesField = newMin;
+    }
 
 
 - GLOBAL INVARIANTS specify constraints about global variables
@@ -91,12 +99,23 @@ Global invariants:
 
 Problem 3 on HW 11 (reverse sequence):
 
+function postcondition:
+    for all positions k, seq(k) == In(seq)(seq.siz-k-1)
+
+loop invariant:
+    size of seq doesnt change
+    bound i (starts at 0, <= seq.size-k-1)
+    1) which ones have changed at the beggining
+        first i positions have swapped (use postcondition format)
+        last i positions have swapped (use the postcondition)
+        middle have NOT changed (from i to seq.size - i) 
+
 
 def reverseSeq(seq: ZS): Unit = {
   var i: Z = 0
   while (i < seq.size/2) {
   var temp: Z = seq(i)
-    seq(i) = seq(seq.size-i-1)
+    seq(i) = seq(seq.size-i-1) // end of loop
     seq(seq.size-i-1) = temp
     i = i + 1
   }
@@ -115,6 +134,7 @@ can add a precondition about sequence size
 ///////////////////////////////////
 
 Problem 6 on HW 11: Fan specification
+//think old time fan with speed nob and turn lever
 
 Fan speeds: 0-5
 Fan can be on (speeds 1-5) or off (speed 0)
@@ -153,28 +173,43 @@ Functions:
 
 
     Fan on, speed 3, rotate on. Can we call setSpeed(2)?
+        no, speed would be while rotating 
+        need to require if speed parameter < 3, then fan is not rotating
 
     Fan off, speed 0, rotate off. Can we call setSpeed(1)?
+        yes
+        the fan should be marked on 
 
     Fan on, speed 2, rotate off. Can we call setSpeed(0)?
+        no, have to go through one first
 
     Fan on, speed 3, rotate on. Can we call setSpeed(4)?
+        yes, changing by only one 
 
     Fan on, speed 3, rotate on. Can we call makeRotate()?
+        no, already on
 
     Fan on, speed 5, rotate off. Can we call setSpeed(5)?
+        no, already at 5, not making a change
 
     Fan on, speed 5, rotate off. Can we call setSpeed(6)?
+        no, only have 5 settings, violate global invariant
 
     Fan on, speed 1, rotate off. Can we call setSpeed(0)?
-
+        yes, changing by one
+        fan turn to off
 
 
 setSpeed(speed: Z) preconditions?
-
+    Require: 
+        speed parameter between 0-5
+        speed parameter should be one greater or one smaller than current speed
+        if speed parameter < 3, rotate needs to be off
 
     postconditions?
-
+        describe that the current speed changes to be parameter speed
+    
+tests calls should be incorrect, comment out 
 ///////////////////////////
 
 In-class quiz

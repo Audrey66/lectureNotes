@@ -4,7 +4,19 @@ program (including the assert at the bottom) would be verified in Logika's auto 
 def addToNeg(a: ZS, pos: Z): Unit = {
     Contract(
         //COMPLETE THE FUNCTION CONTRACT
-        
+        Requires(pos >= 0, pos < a.size),
+        Modifies(a),
+        Ensures(
+            //describe every single position in sequence
+            //if returning something, describe what is being returned
+
+            //what does NOT change
+            All(0 until pos)(k => (a(k) == In(a)(k))),
+            All(pos until a.size)(k => (In(a)(k) >= 0 -> a(k) == In(a)(k))),
+
+            //what DOES change
+            All(pos until a.size)(k => (In(a)(k) < 0 -> a(k) == In(a)(k) + 1)),
+        )
 
     )
     var i: Z = pos
@@ -12,8 +24,22 @@ def addToNeg(a: ZS, pos: Z): Unit = {
     while (i < a.size) {
         Invariant(
             //COMPLETE THE LOOP INVARIANT BLOCK
-            
-            
+            Modifies(i,a),
+
+            //bound loop
+            i >= pos, i <= a.size, 
+
+            //size doesnt change
+            a.size == In(a).size
+
+            //what parts of seq have already changed
+            All(pos until i)(k => (k => (In(a)(k) < 0 -> a(k) == In(a)(k) + 1)))
+
+            //what parts of seq has NOT changed
+            All(i until a.size)(k => (a(k) == In(a)(k))), //nothing after i changed
+            All(pos until i)(k => (k => (In(a)(k) >= 0 -> a(k) == In(a)(k)))), //pos until i didnt change nonnegative
+            All(0 until pos)(k => (a(k) == In(a)(k))), // 0 to pos not changed
+             
         )
 
         if (a(i) < 0) {
